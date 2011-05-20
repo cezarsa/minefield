@@ -35,7 +35,7 @@ class MinefieldFrame(wx.Frame):
     WILDCARD = "Campo Minado Salvo (*.minefield)|*.minefield"
 
     def __init__(self, parent, title):
-        wx.Frame.__init__(self, parent, -1, title, pos = [15, 15],
+        wx.Frame.__init__(self, parent, -1, title, pos = [100, 100],
                           style = wx.MINIMIZE_BOX | wx.SYSTEM_MENU | wx.CAPTION | wx.CLOSE_BOX | wx.CLIP_CHILDREN)
 
         menuBar = wx.MenuBar()
