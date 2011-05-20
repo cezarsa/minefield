@@ -9,12 +9,12 @@ class EndGameException(Exception):
 class Minefield:
     BOMB = -1
     EMPTY = 0
-    HIDDEN = "¦"
+    HIDDEN = "Â¦"
     SHOW = "S"
     MARK = "M"
     def __init__(self, sz_i, sz_j, qt_mines):
         if qt_mines > sz_i * sz_j:
-            raise 'Quantidade de Minas Inválida' 
+            raise 'Quantidade de Minas InvÃ¡lida' 
         self.sz_i = sz_i
         self.sz_j = sz_j
         self.qt_mines = qt_mines

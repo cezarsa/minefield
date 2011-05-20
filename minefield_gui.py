@@ -44,10 +44,10 @@ class MinefieldFrame(wx.Frame):
         menu.Append(self.ID_ABRIR_JOGO, "&Abrir...", "Abrir jogo")
         menu.Append(self.ID_SALVAR_JOGO, "&Salvar...", "Salvar jogo")
         menu.Append(wx.ID_SEPARATOR, kind = wx.ITEM_SEPARATOR)
-        menu.Append(self.ID_JOGO_FACIL, "&Fácil", "Nível fácil")
-        menu.Append(self.ID_JOGO_INTER, "&Intermediário", "Nível intermediário")
-        menu.Append(self.ID_JOGO_DIFICIL, "&Difícil", "Nível difícil")
-        menu.Append(self.ID_JOGO_ULTRA, "&Ultra", "Nível ultra-mega-impossível")
+        menu.Append(self.ID_JOGO_FACIL, "&FÃ¡cil", "NÃ­vel fÃ¡cil")
+        menu.Append(self.ID_JOGO_INTER, "&IntermediÃ¡rio", "NÃ­vel intermediÃ¡rio")
+        menu.Append(self.ID_JOGO_DIFICIL, "&DifÃ­cil", "NÃ­vel difÃ­cil")
+        menu.Append(self.ID_JOGO_ULTRA, "&Ultra", "NÃ­vel ultra-mega-impossÃ­vel")
         menu.Append(wx.ID_SEPARATOR, kind = wx.ITEM_SEPARATOR)
         menu.Append(wx.ID_EXIT, "Sai&r\tAlt-X", "Sair")
 
@@ -124,11 +124,11 @@ class MinefieldFrame(wx.Frame):
         
     def OnAbout(self, evt):
         info = wx.AboutDialogInfo()
-        info.Name = "Campo Minado de Kênia"
+        info.Name = "Campo Minado de KÃªnia"
         info.Version = "0.1 Beta"
-        info.Copyright = "(C) 2008 Cezar Sá Espinola"
+        info.Copyright = "(C) 2008 Cezar SÃ¡ Espinola"
         info.Description = wordwrap(
-            "Feito especialmente para Kênia da Silva Farias Espinola, esposa de Cezar. "
+            "Feito especialmente para KÃªnia da Silva Farias Espinola, esposa de Cezar. "
             "A mulher mais linda e mais amada do mundo todo!",
             350, wx.ClientDC(self))
         info.WebSite = ("javascript: document.write('<h1>Eu Te AMO!</h1>');", "Eu te Amo!!!")
@@ -491,7 +491,7 @@ class GameWindow(wx.Window):
 
 class MyApp(wx.App):
     def OnInit(self):
-        frame = MinefieldFrame(None, "Campo Minado de Kênia")
+        frame = MinefieldFrame(None, "Campo Minado de KÃªnia")
         self.SetTopWindow(frame)
         frame.Show(True)
         return True
