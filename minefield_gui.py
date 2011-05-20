@@ -16,10 +16,10 @@ class GameConfig:
         self.flag_img = "flag.png"
         self.bomb_img = "bomb.png"
         self.restart_game()
-        
+
     def restart_game(self):
         self.minefield = Minefield(self.minefield_sz[0], self.minefield_sz[1], self.qt_mines)
-        
+
     def set_nivel(self, nivel):
         self.minefield_sz = [GameConfig.NIVEIS[nivel][0], GameConfig.NIVEIS[nivel][1]]
         self.qt_mines = GameConfig.NIVEIS[nivel][2]
@@ -33,7 +33,7 @@ class MinefieldFrame(wx.Frame):
     ID_ABRIR_JOGO = 15
     ID_SALVAR_JOGO = 16
     WILDCARD = "Campo Minado Salvo (*.minefield)|*.minefield"
-    
+
     def __init__(self, parent, title):
         wx.Frame.__init__(self, parent, -1, title, pos = [15, 15],
                           style = wx.MINIMIZE_BOX | wx.SYSTEM_MENU | wx.CAPTION | wx.CLOSE_BOX | wx.CLIP_CHILDREN)
@@ -55,7 +55,7 @@ class MinefieldFrame(wx.Frame):
         menuHelp.Append(wx.ID_ABOUT, "&Sobre...\tF1", "Sobre o jogo")
 
         menuBar.Append(menu, "&Jogo")
-        menuBar.Append(menuHelp, "&Ajuda")        
+        menuBar.Append(menuHelp, "&Ajuda")
 
         self.SetMenuBar(menuBar)
         self.CreateStatusBar()
@@ -78,10 +78,10 @@ class MinefieldFrame(wx.Frame):
         self.headerWin.config(self.gameConfig)
         header_height = self.headerWin.calculateHeaderHeight()
         size = self.gameWin.calculateGameSize()
-        
+
         self.headerWin.SetSize(wx.Size(size.width, header_height))
         self.gameWin.SetSize(wx.Size(size.width, size.height))
-        
+
         size.height += header_height
         self.SetClientSize(size)
 
@@ -89,7 +89,7 @@ class MinefieldFrame(wx.Frame):
         self.gameConfig.set_nivel(evt.GetId() - self.ID_JOGO_FACIL)
         self.gameConfig.restart_game()
         self.ConfigGame()
-        
+
     def OnNovoJogo(self, evt):
         self.gameConfig.restart_game()
         self.ConfigGame()
@@ -97,7 +97,7 @@ class MinefieldFrame(wx.Frame):
     def OnAbrirJogo(self, evt):
         self.gameWin.block()
         dlg = wx.FileDialog(
-            self, message="Escolha um jogo salvo", defaultDir = os.getcwd(), 
+            self, message="Escolha um jogo salvo", defaultDir = os.getcwd(),
             defaultFile = "", wildcard = self.WILDCARD, style = wx.FD_OPEN)
 
         if dlg.ShowModal() == wx.ID_OK:
@@ -108,11 +108,11 @@ class MinefieldFrame(wx.Frame):
             self.ConfigGame()
         dlg.Destroy()
         self.gameWin.unblock()
-        
+
     def OnSalvarJogo(self, evt):
         self.gameWin.block()
         dlg = wx.FileDialog(
-            self, message="Salvar jogo como...", defaultDir = os.getcwd(), 
+            self, message="Salvar jogo como...", defaultDir = os.getcwd(),
             defaultFile = "", wildcard = self.WILDCARD, style = wx.FD_SAVE | wx.FD_OVERWRITE_PROMPT)
         if dlg.ShowModal() == wx.ID_OK:
             path = dlg.GetPath()
@@ -121,7 +121,7 @@ class MinefieldFrame(wx.Frame):
             fp.close()
         dlg.Destroy()
         self.gameWin.unblock()
-        
+
     def OnAbout(self, evt):
         info = wx.AboutDialogInfo()
         info.Name = "Campo Minado de Kênia"
@@ -133,7 +133,7 @@ class MinefieldFrame(wx.Frame):
             350, wx.ClientDC(self))
         info.WebSite = ("javascript: document.write('<h1>Eu Te AMO!</h1>');", "Eu te Amo!!!")
         wx.AboutBox(info)
-        
+
     def OnClose(self, evt):
         self.Close()
 
@@ -186,7 +186,7 @@ class HeaderWindow(wx.Window):
         self.gameConfig = gameConfig
         self.Refresh(False)
         self.Update()
-        
+
     def calculateHeaderHeight(self):
         return max(self.time_sz[1], self.mark_sz[1]) + self.margin.top + self.margin.bottom
 
@@ -198,7 +198,7 @@ class HeaderWindow(wx.Window):
         font.SetPointSize(10)
         font.SetWeight(wx.FONTWEIGHT_BOLD)
         dc.SetFont(font)
-        
+
         dc.SetBrush(wx.Brush(self.bg_color, wx.SOLID))
         dc.SetPen(wx.Pen(self.bg_color, 0))
         dc.DrawRectangle(0, 0, sz[0], sz[1])
@@ -221,7 +221,7 @@ class HeaderWindow(wx.Window):
         dc.SetBrush(wx.Brush(self.shadow_color, wx.SOLID))
         dc.SetPen(wx.Pen(self.shadow_color, 0))
         dc.DrawRectangle(x + 2, y + 2, self.time_sz[0], self.time_sz[1])
-        
+
         dc.SetBrush(wx.Brush(self.time_bg_color, wx.SOLID))
         dc.SetPen(wx.Pen(self.time_bg_color, 0))
         dc.DrawRectangle(x, y, self.time_sz[0], self.time_sz[1])
@@ -230,7 +230,7 @@ class HeaderWindow(wx.Window):
         str_sz = dc.GetTextExtent(time_str)
         dc.DrawText(time_str, x + (self.time_sz[0] / 2) - (str_sz[0] / 2),
                               y + (self.time_sz[1] / 2) - (str_sz[1] / 2))
-        
+
 
 
 class GameWindow(wx.Window):
@@ -255,13 +255,13 @@ class GameWindow(wx.Window):
         self.block_frame_color = wx.Colour(220, 220, 220)
         self.block_number_bg_color = wx.Colour(200, 200, 200)
         self.block_number_colors = [
-            wx.Colour(0, 0, 255), 
-            wx.Colour(0, 128, 0), 
-            wx.Colour(255, 0, 0), 
-            wx.Colour(0, 0, 128), 
-            wx.Colour(128, 0, 0), 
-            wx.Colour(0, 128, 128), 
-            wx.Colour(0, 0, 0), 
+            wx.Colour(0, 0, 255),
+            wx.Colour(0, 128, 0),
+            wx.Colour(255, 0, 0),
+            wx.Colour(0, 0, 128),
+            wx.Colour(128, 0, 0),
+            wx.Colour(0, 128, 128),
+            wx.Colour(0, 0, 0),
             wx.Colour(128, 128, 128)
         ]
         self.highlight_bitmap = self.make_bitmap(self.block_size.width, self.block_size.height, 255, 255, 0, 150)
@@ -284,14 +284,14 @@ class GameWindow(wx.Window):
         self.is_first_move = True
         self.Refresh(False)
         self.Update()
-        
+
     def make_bitmap(self, width, height, red, green, blue, alpha):
         bmp = wx.EmptyBitmap(width, height + 1, 32)
         pixelData = wx.AlphaPixelData(bmp)
         for pixel in pixelData:
             pixel.Set(red, green, blue, alpha)
         return bmp
-        
+
     def calculateGameSize(self):
         width = (self.block_size.width * self.minefield.sz_j) + \
                 (self.block_frame.width * (self.minefield.sz_j - 1)) + \
@@ -319,7 +319,7 @@ class GameWindow(wx.Window):
                     dc.DrawBitmap(self.bg_bitmap, init_pos[0], init_pos[1], False)
                     init_pos[1] += self.bg_bitmap.GetHeight()
                 init_pos[0] += self.bg_bitmap.GetWidth()
- 
+
         dc.SetBrush(wx.Brush(self.margin_color, wx.SOLID))
         dc.SetPen(wx.Pen(self.margin_color, 0))
         dc.DrawRectangle(0, 0, sz.width, self.margin.top)
@@ -375,13 +375,13 @@ class GameWindow(wx.Window):
                               x + (self.block_size.width / 2) - (self.flag_bitmap.GetWidth() / 2),
                               y + (self.block_size.height / 2) - (self.flag_bitmap.GetHeight() / 2),
                               True)
-            
+
             if el == Minefield.BOMB and self.bomb_bitmap:
                 dc.DrawBitmap(self.bomb_bitmap,
                               x + (self.block_size.width / 2) - (self.bomb_bitmap.GetWidth() / 2),
                               y + (self.block_size.height / 2) - (self.bomb_bitmap.GetHeight() / 2),
                               True)
-            
+
             if is_number:
                 str_sz = dc.GetTextExtent(str(el))
                 dc.DrawText(str(el), x + (self.block_size.width / 2) - (str_sz[0] / 2),
@@ -407,11 +407,11 @@ class GameWindow(wx.Window):
     def block(self):
         self.is_blocked = True
         self.has_blocked_event = 0
-        
+
     def unblock(self):
         if self.is_blocked:
             self.is_unblock = True
-        
+
     def on_mouse_events(self, event):
         event.Skip()
         if self.ignoreLeftUp and event.LeftUp():
@@ -429,7 +429,7 @@ class GameWindow(wx.Window):
             else:
                 self.has_blocked_event += 1
             return
-        
+
         matrix_pos = self.position_to_matrix_pos(event.GetPosition())
         repaint = False
         if matrix_pos != False:
@@ -495,6 +495,6 @@ class MyApp(wx.App):
         self.SetTopWindow(frame)
         frame.Show(True)
         return True
-        
+
 app = MyApp(redirect=False)
 app.MainLoop()
