@@ -433,7 +433,7 @@ class GameWindow(wx.Window):
         matrix_pos = self.position_to_matrix_pos(event.GetPosition())
         repaint = False
         if matrix_pos != False:
-            if event.LeftIsDown() and event.RightUp() or event.RightIsDown() and event.LeftUp():
+            if event.LeftIsDown() and event.RightUp() or event.RightIsDown() and event.LeftUp() or event.MiddleUp():
                 if event.LeftIsDown(): self.ignoreLeftUp = True
                 elif event.RightIsDown(): self.ignoreRightUp = True
                 try:
@@ -453,7 +453,7 @@ class GameWindow(wx.Window):
             elif event.RightUp():
                 self.minefield.mark(*matrix_pos)
                 repaint = True
-            if event.LeftIsDown() and event.RightIsDown():
+            if event.LeftIsDown() and event.RightIsDown() or event.MiddleIsDown():
                 self.highlight_around = matrix_pos
                 repaint = True
             else:
