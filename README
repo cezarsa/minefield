@@ -1,1 +1,8 @@
 Simple minefield game using wxPython.
+
+* Running on OS X Snow Leopard:
+
+# After installing wxPython:
+export LC_CTYPE="UTF-8"
+export VERSIONER_PYTHON_PREFER_32_BIT=yes
+arch -i386 python minefield_gui.py
